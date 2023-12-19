@@ -15,7 +15,12 @@ final class ReservationViewModel: ObservableObject {
     let loader = DownloadManager()
     var cancellables = Set<AnyCancellable>()
     
-    @Published var tourists: [TouristModel] = [TouristModel(firstName: "", secondName: "", birthDate: "", nationality: "", passportNumber: "", passportEndDate: "")]
+    @Published var tourists: [TouristModel] = [TouristModel(id: 1, firstName: "", secondName: "", birthDate: "", nationality: "", passportNumber: "", passportEndDate: "")]
+    
+    @Published var checkFieldStatus: Bool = true
+    
+    @Published var phoneNumber: String = ""
+    @Published var userEmail: String = ""
     
     func downloadReservationInfo() {
         guard let url = URL(string: "https://run.mocky.io/v3/63866c74-d593-432c-af8e-f279d1a8d2ff") else { return }
@@ -29,5 +34,21 @@ final class ReservationViewModel: ObservableObject {
                 self?.reservation = reservation
             }
             .store(in: &cancellables)
+    }
+    
+    func addTourist() {
+        let quantity = tourists.count
+        if quantity < 10 {
+            tourists.append(TouristModel(id: quantity + 1, firstName: "", secondName: "", birthDate: "", nationality: "", passportNumber: "", passportEndDate: ""))
+        }
+    }
+    
+    func checkTourist() -> Bool {
+        for tourist in tourists {
+            if tourist.firstName.isEmpty || tourist.secondName.isEmpty || tourist.birthDate.isEmpty || tourist.nationality.isEmpty || tourist.passportNumber.isEmpty || tourist.passportEndDate.isEmpty {
+                return false
+            }
+        }
+        return true
     }
 }

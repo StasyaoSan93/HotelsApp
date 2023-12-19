@@ -32,7 +32,6 @@ struct RoomsView: View {
 }
 
 struct RoomCard: View {
-    
     @StateObject var ivm: ImageDownloader = ImageDownloader()
     let room: RoomModel
     

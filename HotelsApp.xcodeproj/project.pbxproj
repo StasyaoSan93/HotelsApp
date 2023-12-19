@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7D0E169F2B31B09500BADD5D /* FieldType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D0E169E2B31B09500BADD5D /* FieldType.swift */; };
 		7D1157A32B2FF7E600D8F43C /* HotelsAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D1157A22B2FF7E600D8F43C /* HotelsAppApp.swift */; };
 		7D1157A72B2FF7E700D8F43C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7D1157A62B2FF7E700D8F43C /* Assets.xcassets */; };
 		7D1157AA2B2FF7E700D8F43C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7D1157A92B2FF7E700D8F43C /* Preview Assets.xcassets */; };
@@ -21,6 +22,7 @@
 		7D1157C92B300FE800D8F43C /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D1157C82B300FE800D8F43C /* View.swift */; };
 		7D1157CC2B30100600D8F43C /* ButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D1157CB2B30100600D8F43C /* ButtonStyle.swift */; };
 		7D1157CE2B301AE400D8F43C /* RoomsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D1157CD2B301AE400D8F43C /* RoomsView.swift */; };
+		7D3C35752B31731A007AE18D /* customTextFieldWithError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D3C35742B31731A007AE18D /* customTextFieldWithError.swift */; };
 		7D5BCD202B30377A00A6D63A /* RoomModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5BCD1F2B30377A00A6D63A /* RoomModel.swift */; };
 		7D5BCD222B3037EC00A6D63A /* RoomsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5BCD212B3037EC00A6D63A /* RoomsViewModel.swift */; };
 		7DCE0A962B304957001DEFCB /* ReservationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DCE0A952B304957001DEFCB /* ReservationModel.swift */; };
@@ -31,6 +33,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7D0E169E2B31B09500BADD5D /* FieldType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieldType.swift; sourceTree = "<group>"; };
 		7D11579F2B2FF7E600D8F43C /* HotelsApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HotelsApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D1157A22B2FF7E600D8F43C /* HotelsAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotelsAppApp.swift; sourceTree = "<group>"; };
 		7D1157A62B2FF7E700D8F43C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -46,6 +49,7 @@
 		7D1157C82B300FE800D8F43C /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
 		7D1157CB2B30100600D8F43C /* ButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonStyle.swift; sourceTree = "<group>"; };
 		7D1157CD2B301AE400D8F43C /* RoomsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomsView.swift; sourceTree = "<group>"; };
+		7D3C35742B31731A007AE18D /* customTextFieldWithError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = customTextFieldWithError.swift; sourceTree = "<group>"; };
 		7D5BCD1F2B30377A00A6D63A /* RoomModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomModel.swift; sourceTree = "<group>"; };
 		7D5BCD212B3037EC00A6D63A /* RoomsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomsViewModel.swift; sourceTree = "<group>"; };
 		7DCE0A952B304957001DEFCB /* ReservationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationModel.swift; sourceTree = "<group>"; };
@@ -66,6 +70,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7D0E169D2B31B07800BADD5D /* Enum */ = {
+			isa = PBXGroup;
+			children = (
+				7D0E169E2B31B09500BADD5D /* FieldType.swift */,
+			);
+			path = Enum;
+			sourceTree = "<group>";
+		};
 		7D1157962B2FF7E600D8F43C = {
 			isa = PBXGroup;
 			children = (
@@ -85,6 +97,7 @@
 		7D1157A12B2FF7E600D8F43C /* HotelsApp */ = {
 			isa = PBXGroup;
 			children = (
+				7D0E169D2B31B07800BADD5D /* Enum */,
 				7D1157CA2B300FEE00D8F43C /* Styles */,
 				7D1157C52B2FFBC500D8F43C /* Extensions */,
 				7D1157BB2B2FFA6300D8F43C /* Services */,
@@ -153,6 +166,7 @@
 			children = (
 				7D1157C32B2FFB0800D8F43C /* ImageSlider.swift */,
 				7DCE0A9F2B305614001DEFCB /* RatingField.swift */,
+				7D3C35742B31731A007AE18D /* customTextFieldWithError.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -249,6 +263,7 @@
 				7D1157BF2B2FFA9900D8F43C /* ImageDownloader.swift in Sources */,
 				7DCE0A982B3049B2001DEFCB /* ReservationViewModel.swift in Sources */,
 				7D1157C92B300FE800D8F43C /* View.swift in Sources */,
+				7D0E169F2B31B09500BADD5D /* FieldType.swift in Sources */,
 				7D1157C72B2FFBD900D8F43C /* Color.swift in Sources */,
 				7D1157B62B2FF9D100D8F43C /* HotelView.swift in Sources */,
 				7DCE0AA02B305614001DEFCB /* RatingField.swift in Sources */,
@@ -256,6 +271,7 @@
 				7D5BCD222B3037EC00A6D63A /* RoomsViewModel.swift in Sources */,
 				7D1157A32B2FF7E600D8F43C /* HotelsAppApp.swift in Sources */,
 				7D1157B82B2FF9EF00D8F43C /* ImageSliderModel.swift in Sources */,
+				7D3C35752B31731A007AE18D /* customTextFieldWithError.swift in Sources */,
 				7D1157BA2B2FFA2800D8F43C /* HotelViewModel.swift in Sources */,
 				7DCE0A9E2B30545D001DEFCB /* TouristModel.swift in Sources */,
 				7D1157BD2B2FFA7B00D8F43C /* DownloadManager.swift in Sources */,

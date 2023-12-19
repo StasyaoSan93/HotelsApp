@@ -23,4 +23,5 @@ struct ColorTheme {
     let buttonColor = Color("buttonColor")
     let textWhite = Color("textWhite")
     let backgroundForField = Color("backgroundForField")
+    let empryTextColor = Color("empryTextColor")
 }

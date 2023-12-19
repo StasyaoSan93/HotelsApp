@@ -8,7 +8,7 @@
 import Foundation
 
 struct TouristModel: Identifiable {
-    let id: String = UUID().uuidString
+    let id: Int
     var firstName: String
     var secondName: String
     var birthDate: String
