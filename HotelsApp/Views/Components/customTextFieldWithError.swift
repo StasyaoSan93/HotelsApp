@@ -37,6 +37,7 @@ struct customTextFieldWithError: View {
                             .font(.system(size: 17))
                             .foregroundStyle(Color.theme.grayText)
                     })
+                    .keyboardType(.default)
                     .font(.system(size: fieldText.isEmpty ? 17 : 16))
                     .disableAutocorrection(true)
             case .phone:
@@ -44,6 +45,7 @@ struct customTextFieldWithError: View {
                     TextField(hintText, text: $fieldText)
                         .focused($isFocused)
                         .opacity(0.0)
+                        .keyboardType(.phonePad)
                     
                     Text(viewPhone.isEmpty ? hintText : viewPhone)
                         .font(.system(size: fieldText.isEmpty ? 17 : 16))
@@ -71,6 +73,7 @@ struct customTextFieldWithError: View {
                             .font(.system(size: 17))
                             .foregroundStyle(Color.theme.grayText)
                     })
+                    .keyboardType(.emailAddress)
                     .font(.system(size: fieldText.isEmpty ? 17 : 16))
                     .disableAutocorrection(true)
                     .focused($isFocused)
