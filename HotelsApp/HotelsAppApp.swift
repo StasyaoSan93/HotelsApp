@@ -9,9 +9,15 @@ import SwiftUI
 
 @main
 struct HotelsAppApp: App {
+    
+    @StateObject private var screen: ScreenNavigationClass = ScreenNavigationClass()
+    @StateObject private var main: MainViewModel = MainViewModel()
+    
     var body: some Scene {
         WindowGroup {
-            HotelView()
+            RootView()
+                .environmentObject(screen)
+                .environmentObject(main)
         }
     }
 }

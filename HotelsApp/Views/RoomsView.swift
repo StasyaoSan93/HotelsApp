@@ -9,30 +9,75 @@ import SwiftUI
 
 struct RoomsView: View {
     
-    @StateObject var vm: RoomsViewModel = RoomsViewModel()
+    @EnvironmentObject private var screen: ScreenNavigationClass
+    @EnvironmentObject private var main: MainViewModel
+    @State private var topSafeArea: CGFloat = 0
     
     var body: some View {
-        ZStack(content: {
-            Color.theme.backgroundAll.ignoresSafeArea()
-            
-            ScrollView {
-                ForEach(vm.rooms.rooms, id: \.self) { room in
-                    RoomCard(room: room)
-                }
-            }
-        })
-        .onAppear(perform: {
-            vm.downloadRoomsInfo()
+        GeometryReader(content: { geometry in
+            ZStack(content: {
+                Color.theme.backgroundAll.ignoresSafeArea()
+                
+                VStack(content: {
+                    header
+                    
+                    ScrollView {
+                        ForEach(main.rooms.rooms, id: \.self) { room in
+                            RoomCard(screen: screen, room: room)
+                        }
+                    }
+                })
+                .ignoresSafeArea()
+            })
+            .onAppear(perform: {
+                topSafeArea = geometry.safeAreaInsets.top
+                main.downloadRoomsInfo()
+            })
         })
     }
 }
 
 #Preview {
     RoomsView()
+        .environmentObject(ScreenNavigationClass())
+        .environmentObject(MainViewModel())
+}
+
+extension RoomsView {
+    private var header: some View {
+        HStack(content: {
+            Button(action: {
+                screen.screen = "Home"
+            }, label: {
+                Image(systemName: "chevron.left")
+            })
+            
+            Spacer()
+            
+            Text(main.hotel.name)
+            
+            Spacer()
+            
+            Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
+                Image(systemName: "chevron.left")
+                    .opacity(0.0)
+            })
+        })
+        .font(.system(size: 18))
+        .foregroundStyle(Color.theme.blackText)
+        .padding(.top, topSafeArea)
+        .padding(.bottom)
+        .padding(.horizontal)
+        .background {
+            Color.theme.backgroundWhite
+        }
+        .cornerRadius(12)
+    }
 }
 
 struct RoomCard: View {
     @StateObject var ivm: ImageDownloader = ImageDownloader()
+    @ObservedObject var screen: ScreenNavigationClass
     let room: RoomModel
     
     var body: some View {
@@ -96,7 +141,9 @@ struct RoomCard: View {
                     Spacer()
                 })
                 
-                Button(action: {}, label: {
+                Button(action: {
+                    screen.screen = "Book"
+                }, label: {
                     Text("Выбрать номер")
                 })
                 .withCustomButtonStyle()

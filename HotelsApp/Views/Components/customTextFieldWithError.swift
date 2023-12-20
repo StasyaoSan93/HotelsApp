@@ -49,12 +49,17 @@ struct customTextFieldWithError: View {
                         .font(.system(size: fieldText.isEmpty ? 17 : 16))
                         .foregroundStyle(fieldText.isEmpty ? Color.theme.grayText : Color.theme.blackText)
                         .frame(maxWidth: .infinity, alignment: .leading)
-                        .onChange(of: fieldText, initial: false) { oldValue, newValue in
+                        .onChange(of: fieldText) { [fieldText] newValue in
                             if newValue.count > 11 {
-                                self.fieldText = oldValue
+                                self.fieldText = fieldText
                             } else if newValue.count == 0 {
                                 viewPhone = hintText
                             } else {
+                                viewPhone = formatForPhone(with: "+* (***) ***-**-**", phone: newValue)
+                            }
+                        }
+                        .onAppear {
+                            if viewPhone.isEmpty && !fieldText.isEmpty {
                                 viewPhone = formatForPhone(with: "+* (***) ***-**-**", phone: fieldText)
                             }
                         }
@@ -69,11 +74,11 @@ struct customTextFieldWithError: View {
                     .font(.system(size: fieldText.isEmpty ? 17 : 16))
                     .disableAutocorrection(true)
                     .focused($isFocused)
-                    .onChange(of: isFocused) {
+                    .onChange(of: isFocused, perform: { value in
                         if (!isFocused && !fieldText.isEmpty) {
-                            isEmailValid = isValidEmail(fieldText)
+                            isEmailValid = fieldText.isValidEmail()
                         }
-                    }
+                    })
             }
         }
         .foregroundColor(Color.theme.blackText)
@@ -82,10 +87,12 @@ struct customTextFieldWithError: View {
         .frame(height: 52)
         .background(content: {
             switch fieldType {
-            case .info, .phone:
+            case .info:
                 (!backColor && fieldText.isEmpty) ? Color.theme.empryTextColor.opacity(0.75) : Color.theme.backgroundForField
+            case .phone:
+                (!backColor && (fieldText.isEmpty || fieldText.count < 11)) ? Color.theme.empryTextColor.opacity(0.75) : Color.theme.backgroundForField
             case .email:
-                !isEmailValid ? Color.theme.empryTextColor.opacity(0.75) : Color.theme.backgroundForField
+                !isEmailValid || (!isEmailValid && !backColor) ? Color.theme.empryTextColor.opacity(0.75) : Color.theme.backgroundForField
             }
             
         })
@@ -107,13 +114,6 @@ struct customTextFieldWithError: View {
 }
 
 extension customTextFieldWithError {
-    func isValidEmail(_ email: String) -> Bool {
-        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
-
-        let emailPred = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
-        return emailPred.evaluate(with: email)
-    }
-    
     func formatForPhone(with mask: String, phone: String) -> String {
         let numbers = phone.replacingOccurrences(of: "[^0-9]", with: "", options: .regularExpression)
         var result = ""

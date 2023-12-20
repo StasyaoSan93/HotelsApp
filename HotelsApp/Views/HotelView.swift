@@ -9,16 +9,18 @@ import SwiftUI
 
 struct HotelView: View {
     
-    @StateObject var vm: HotelViewModel = HotelViewModel()
-    @StateObject var ivm: ImageDownloader = ImageDownloader()
+    @EnvironmentObject private var screen: ScreenNavigationClass
+    @EnvironmentObject private var main: MainViewModel
+    @StateObject private var ivm: ImageDownloader = ImageDownloader()
+    
     @State private var topSafeArea: CGFloat = 0
     @State private var bottomSafeArea: CGFloat = 0
     
     var body: some View {
-        ZStack(content: {
-            Color.theme.backgroundAll.ignoresSafeArea()
-            
-            GeometryReader(content: { geometry in
+        GeometryReader(content: { geometry in
+            ZStack(content: {
+                Color.theme.backgroundAll.ignoresSafeArea()
+                
                 ScrollView {
                     hotelMainCard
                     
@@ -26,27 +28,26 @@ struct HotelView: View {
                     
                     bottomButton
                 }
-                .scrollClipDisabled()
                 .ignoresSafeArea()
                 .onAppear(perform: {
                     topSafeArea = geometry.safeAreaInsets.top
                     bottomSafeArea = geometry.safeAreaInsets.bottom
+                    main.downloadHotelInfo()
+                })
+                .onReceive(main.$hotel, perform: { hotel in
+                    if !hotel.imageUrls.isEmpty {
+                        ivm.downloadImage(url: hotel.imageUrls)
+                    }
                 })
             })
-        })
-        .onAppear(perform: {
-            vm.downloadHotelInfo()
-        })
-        .onReceive(vm.$hotel, perform: { hotel in
-            if !hotel.imageUrls.isEmpty {
-                ivm.downloadImage(url: hotel.imageUrls)
-            }
         })
     }
 }
 
 #Preview {
     HotelView()
+        .environmentObject(ScreenNavigationClass())
+        .environmentObject(MainViewModel())
 }
 
 extension HotelView {
@@ -59,18 +60,18 @@ extension HotelView {
             
             ImageSlider(slider: ivm.imagesList)
             
-            HotelsApp.ratingField(number: "\(vm.hotel.rating)", description: vm.hotel.ratingName)
+            HotelsApp.ratingField(number: "\(main.hotel.rating)", description: main.hotel.ratingName)
                 .padding(.horizontal, 12)
             
             VStack(spacing: 8, content: {
-                Text(vm.hotel.name)
+                Text(main.hotel.name)
                     .font(.system(size: 22))
                     .foregroundStyle(Color.theme.blackText)
                     .fontWeight(.semibold)
                     .frame(maxWidth: .infinity, alignment: .leading)
                 
                 Button(action: {}, label: {
-                    Text(vm.hotel.adress)
+                    Text(main.hotel.adress)
                         .font(.system(size: 14))
                         .foregroundStyle(Color.theme.blueText)
                         .fontWeight(.medium)
@@ -78,12 +79,12 @@ extension HotelView {
                 })
                 
                 HStack(content: {
-                    Text("от \(vm.hotel.minimalPrice) ₽")
+                    Text("от \(main.hotel.minimalPrice) ₽")
                         .font(.system(size: 30))
                         .foregroundStyle(Color.theme.blackText)
                         .fontWeight(.semibold)
                     
-                    Text(vm.hotel.priceForIt)
+                    Text(main.hotel.priceForIt)
                         .font(.system(size: 16))
                         .foregroundStyle(Color.theme.grayText)
                         .fontWeight(.medium)
@@ -110,7 +111,7 @@ extension HotelView {
             })
             
             VStack(content: {
-                ForEach(vm.hotel.aboutTheHotel.peculiarities, id: \.self) { peculiarity in
+                ForEach(main.hotel.aboutTheHotel.peculiarities, id: \.self) { peculiarity in
                     Text(peculiarity)
                         .font(.system(size: 16))
                         .foregroundStyle(Color.theme.grayText)
@@ -123,7 +124,7 @@ extension HotelView {
                 }
             })
             
-            Text(vm.hotel.aboutTheHotel.description)
+            Text(main.hotel.aboutTheHotel.description)
                 .font(.system(size: 16))
                 .foregroundStyle(Color.theme.blackText.opacity(0.9))
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -178,7 +179,9 @@ extension HotelView {
     
     private var bottomButton: some View {
         VStack(content: {
-            Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
+            Button(action: {
+                screen.screen = "Room"
+            }, label: {
                 Text("К выбору номера")
             })
             .withCustomButtonStyle()

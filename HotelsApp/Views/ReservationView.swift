@@ -9,58 +9,95 @@ import SwiftUI
 
 struct ReservationView: View {
     
-    @StateObject var vm: ReservationViewModel = ReservationViewModel()
+    @EnvironmentObject private var screen: ScreenNavigationClass
+    @EnvironmentObject private var main: MainViewModel
+    @State private var topSafeArea: CGFloat = 0
     @State private var bottomSafeArea: CGFloat = 0
     
     var body: some View {
-        ZStack(content: {
-            Color.theme.backgroundAll.ignoresSafeArea()
-            
-            GeometryReader(content: { geometry in
-                ScrollView(content: {
-                    mainCard
+        GeometryReader(content: { geometry in
+            ZStack(content: {
+                Color.theme.backgroundAll.ignoresSafeArea()
+                
+                VStack(content: {
+                    header
                     
-                    aboutCard
-                    
-                    personalInformationCard
-                    
-                    touristsCards
-                    
-                    addTouristCard
-                    
-                    priceCard
-                    
-                    bottomButton
+                    ScrollView(content: {
+                        mainCard
+                        
+                        aboutCard
+                        
+                        personalInformationCard
+                        
+                        touristsCards
+                        
+                        addTouristCard
+                        
+                        priceCard
+                        
+                        bottomButton
+                    })
                 })
-                .ignoresSafeArea(edges: .bottom)
-                .onAppear(perform: {
-                    bottomSafeArea = geometry.safeAreaInsets.bottom
-                })
+                .ignoresSafeArea()
             })
-        })
-        .onAppear(perform: {
-            vm.downloadReservationInfo()
+            .onAppear(perform: {
+                topSafeArea = geometry.safeAreaInsets.top
+                bottomSafeArea = geometry.safeAreaInsets.bottom
+                main.downloadReservationInfo()
+            })
         })
     }
 }
 
 #Preview {
     ReservationView()
+        .environmentObject(ScreenNavigationClass())
+        .environmentObject(MainViewModel())
 }
 
 extension ReservationView {
+    private var header: some View {
+        HStack(content: {
+            Button(action: {
+                screen.screen = "Room"
+            }, label: {
+                Image(systemName: "chevron.left")
+            })
+            
+            Spacer()
+            
+            Text("Бронирование")
+            
+            Spacer()
+            
+            Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
+                Image(systemName: "chevron.left")
+                    .opacity(0.0)
+            })
+        })
+        .font(.system(size: 18))
+        .foregroundStyle(Color.theme.blackText)
+        .padding(.top, topSafeArea)
+        .padding(.bottom)
+        .padding(.horizontal)
+        .background {
+            Color.theme.backgroundWhite
+        }
+        .cornerRadius(12)
+    }
+    
     private var mainCard: some View {
         VStack(spacing: 5, content: {
-            HotelsApp.ratingField(number: "\(vm.reservation.horating)", description: vm.reservation.ratingName)
+            HotelsApp.ratingField(number: "\(main.reservation.horating)", description: main.reservation.ratingName)
             
-            Text(vm.reservation.hotelName)
+            Text(main.reservation.hotelName)
                 .font(.system(size: 22))
                 .foregroundStyle(Color.theme.blackText)
                 .fontWeight(.semibold)
                 .frame(maxWidth: .infinity, alignment: .leading)
             
             Button(action: {}, label: {
-                Text(vm.reservation.hotelAdress)
+                Text(main.reservation.hotelAdress)
                     .font(.system(size: 14))
                     .foregroundStyle(Color.theme.blueText)
                     .fontWeight(.medium)
@@ -76,19 +113,19 @@ extension ReservationView {
     
     private var aboutCard: some View {
         VStack(spacing: 8, content: {
-            customTextField(leftText: "Вылет из", rightText: vm.reservation.departure, rightTrailing: false, rightBlueColor: false)
+            customTextField(leftText: "Вылет из", rightText: main.reservation.departure, rightTrailing: false, rightBlueColor: false)
             
-            customTextField(leftText: "Срана, город", rightText: vm.reservation.arrivalCountry, rightTrailing: false, rightBlueColor: false)
+            customTextField(leftText: "Срана, город", rightText: main.reservation.arrivalCountry, rightTrailing: false, rightBlueColor: false)
             
-            customTextField(leftText: "Даты", rightText: "\(vm.reservation.tourDateStart) - \(vm.reservation.tourDateStop)", rightTrailing: false, rightBlueColor: false)
+            customTextField(leftText: "Даты", rightText: "\(main.reservation.tourDateStart) - \(main.reservation.tourDateStop)", rightTrailing: false, rightBlueColor: false)
             
-            customTextField(leftText: "Кол-во ночей", rightText: "\(vm.reservation.numberOfNights)", rightTrailing: false, rightBlueColor: false)
+            customTextField(leftText: "Кол-во ночей", rightText: "\(main.reservation.numberOfNights)", rightTrailing: false, rightBlueColor: false)
             
-            customTextField(leftText: "Отель", rightText: vm.reservation.hotelName, rightTrailing: false, rightBlueColor: false)
+            customTextField(leftText: "Отель", rightText: main.reservation.hotelName, rightTrailing: false, rightBlueColor: false)
             
-            customTextField(leftText: "Номер", rightText: vm.reservation.room, rightTrailing: false, rightBlueColor: false)
+            customTextField(leftText: "Номер", rightText: main.reservation.room, rightTrailing: false, rightBlueColor: false)
             
-            customTextField(leftText: "Питание", rightText: vm.reservation.nutrition, rightTrailing: false, rightBlueColor: false)
+            customTextField(leftText: "Питание", rightText: main.reservation.nutrition, rightTrailing: false, rightBlueColor: false)
         })
         .padding(.vertical, 20)
         .background {
@@ -107,9 +144,9 @@ extension ReservationView {
                 Spacer()
             })
             
-            customTextFieldWithError(hintText: "Номер телефона", backColor: true, fieldText: $vm.phoneNumber, fieldType: .phone)
+            customTextFieldWithError(hintText: "Номер телефона", backColor: main.checkFieldStatus, fieldText: $main.phoneNumber, fieldType: .phone)
             
-            customTextFieldWithError(hintText: "Почта", backColor: true, fieldText: $vm.userEmail, fieldType: .email)
+            customTextFieldWithError(hintText: "Почта", backColor: main.checkFieldStatus, fieldText: $main.userEmail, fieldType: .email)
             
             Text("Эти данные никому не передаются. После оплаты мы вышли чек на указанный вами номер и почту")
                 .font(.system(size: 14))
@@ -125,8 +162,8 @@ extension ReservationView {
     
     private var touristsCards: some View {
         VStack(content: {
-            ForEach($vm.tourists) { tourist in
-                touristCard(tourist: tourist, fieldColor: vm.checkFieldStatus)
+            ForEach($main.tourists) { tourist in
+                touristCard(tourist: tourist, fieldColor: main.checkFieldStatus)
             }
         })
     }
@@ -141,7 +178,7 @@ extension ReservationView {
             
             Button(action: {
                 withAnimation {
-                    vm.addTourist()
+                    main.addTourist()
                 }
             }, label: {
                 Image(systemName: "plus")
@@ -163,13 +200,13 @@ extension ReservationView {
     
     private var priceCard: some View {
         VStack(spacing: 8, content: {
-            customTextField(leftText: "Тур", rightText: "\(vm.reservation.tourPrice) ₽", rightTrailing: true, rightBlueColor: false)
+            customTextField(leftText: "Тур", rightText: "\(main.reservation.tourPrice) ₽", rightTrailing: true, rightBlueColor: false)
             
-            customTextField(leftText: "Топливный сбор", rightText: "\(vm.reservation.fuelCharge) ₽", rightTrailing: true, rightBlueColor: false)
+            customTextField(leftText: "Топливный сбор", rightText: "\(main.reservation.fuelCharge) ₽", rightTrailing: true, rightBlueColor: false)
             
-            customTextField(leftText: "Сервисный сбор", rightText: "\(vm.reservation.serviceCharge) ₽", rightTrailing: true, rightBlueColor: false)
+            customTextField(leftText: "Сервисный сбор", rightText: "\(main.reservation.serviceCharge) ₽", rightTrailing: true, rightBlueColor: false)
             
-            customTextField(leftText: "К оплате", rightText: "\(vm.reservation.tourPrice + vm.reservation.fuelCharge + vm.reservation.serviceCharge) ₽", rightTrailing: true, rightBlueColor: true)
+            customTextField(leftText: "К оплате", rightText: "\(main.reservation.tourPrice + main.reservation.fuelCharge + main.reservation.serviceCharge) ₽", rightTrailing: true, rightBlueColor: true)
         })
         .padding(.vertical, 20)
         .background {
@@ -181,9 +218,12 @@ extension ReservationView {
     private var bottomButton: some View {
         VStack(content: {
             Button(action: {
-                vm.checkFieldStatus = vm.checkTourist()
+                main.checkFieldStatus = main.checkTourist()
+                if main.checkFieldStatus {
+                    screen.screen = "Final"
+                }
             }, label: {
-                Text("Оплатить \(vm.reservation.tourPrice + vm.reservation.fuelCharge + vm.reservation.serviceCharge) ₽")
+                Text("Оплатить \(main.reservation.tourPrice + main.reservation.fuelCharge + main.reservation.serviceCharge) ₽")
             })
             .withCustomButtonStyle()
         })
