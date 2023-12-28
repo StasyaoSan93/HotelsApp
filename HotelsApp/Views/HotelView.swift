@@ -53,7 +53,7 @@ struct HotelView: View {
 extension HotelView {
     private var hotelMainCard: some View {
         VStack(content: {
-            Text("Отель")
+            Text(TextConstants.hotel)
                 .font(.system(size: 18))
                 .foregroundStyle(Color.theme.blackText)
                 .padding(.top, topSafeArea)
@@ -79,7 +79,7 @@ extension HotelView {
                 })
                 
                 HStack(content: {
-                    Text("от \(main.hotel.minimalPrice) ₽")
+                    Text(TextConstants.minHotelPrice(price: main.hotel.minimalPrice))
                         .font(.system(size: 30))
                         .foregroundStyle(Color.theme.blackText)
                         .fontWeight(.semibold)
@@ -104,7 +104,7 @@ extension HotelView {
     private var aboutHotelCard: some View {
         VStack(content: {
             HStack(content: {
-                Text("Об отеле")
+                Text(TextConstants.aboutHotel)
                     .font(.system(size: 22))
                     .foregroundStyle(Color.theme.blackText)
                 Spacer()
@@ -130,11 +130,11 @@ extension HotelView {
                 .frame(maxWidth: .infinity, alignment: .leading)
             
             VStack(content: {
-                aboutHotelField(icon: "icon1", text: "Удобства", bottomDivider: true)
+                aboutHotelField(icon: TextConstants.icon1, text: TextConstants.facilities, bottomDivider: true)
                 
-                aboutHotelField(icon: "icon2", text: "Что включено", bottomDivider: true)
+                aboutHotelField(icon: TextConstants.icon2, text: TextConstants.included, bottomDivider: true)
                 
-                aboutHotelField(icon: "icon3", text: "Что не включено", bottomDivider: false)
+                aboutHotelField(icon: TextConstants.icon3, text: TextConstants.notIncluded, bottomDivider: false)
             })
             .padding(.vertical, 20)
             .background {
@@ -160,12 +160,12 @@ extension HotelView {
                     Text(text)
                         .font(.system(size: 16))
                         .foregroundStyle(Color.theme.blackText)
-                    Text("Самое необходимое")
+                    Text(TextConstants.essentials)
                         .font(.system(size: 14))
                         .foregroundStyle(Color.theme.grayText)
                 })
                 Spacer()
-                Image(systemName: "chevron.right")
+                Image(systemName: TextConstants.chevronRight)
             })
             .padding(.horizontal, 30)
             
@@ -180,9 +180,9 @@ extension HotelView {
     private var bottomButton: some View {
         VStack(content: {
             Button(action: {
-                screen.screen = "Room"
+                screen.screen = .room
             }, label: {
-                Text("К выбору номера")
+                Text(TextConstants.toRoomPage)
             })
             .withCustomButtonStyle()
         })

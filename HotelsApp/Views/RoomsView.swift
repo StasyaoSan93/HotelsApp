@@ -47,9 +47,9 @@ extension RoomsView {
     private var header: some View {
         HStack(content: {
             Button(action: {
-                screen.screen = "Home"
+                screen.screen = .hotel
             }, label: {
-                Image(systemName: "chevron.left")
+                Image(systemName: TextConstants.chevronLeft)
             })
             
             Spacer()
@@ -59,7 +59,7 @@ extension RoomsView {
             Spacer()
             
             Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
-                Image(systemName: "chevron.left")
+                Image(systemName: TextConstants.chevronLeft)
                     .opacity(0.0)
             })
         })
@@ -109,8 +109,8 @@ struct RoomCard: View {
                 HStack(content:  {
                     Button(action: {}, label: {
                         HStack(content:  {
-                            Text("Подробнее о номере")
-                            Image(systemName: "chevron.right")
+                            Text(TextConstants.aboutRoom)
+                            Image(systemName: TextConstants.chevronRight)
                         })
                         .font(.system(size: 16))
                         .foregroundStyle(Color.theme.blueText)
@@ -127,7 +127,7 @@ struct RoomCard: View {
                 })
                 
                 HStack(alignment: .bottom, content:  {
-                    Text("\(room.price) ₽")
+                    Text(TextConstants.forPriceField(price: room.price))
                         .font(.system(size: 30))
                         .foregroundStyle(Color.theme.blackText)
                         .fontWeight(.medium)
@@ -142,9 +142,9 @@ struct RoomCard: View {
                 })
                 
                 Button(action: {
-                    screen.screen = "Book"
+                    screen.screen = .book
                 }, label: {
-                    Text("Выбрать номер")
+                    Text(TextConstants.choiseRoom)
                 })
                 .withCustomButtonStyle()
             })

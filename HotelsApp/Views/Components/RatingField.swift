@@ -11,7 +11,7 @@ import SwiftUI
 func ratingField(number: String, description: String) -> some View {
     HStack {
         HStack(content: {
-            Image("starImage", bundle: nil)
+            Image(TextConstants.starImage, bundle: nil)
                 .resizable()
                 .frame(width: 15, height: 15)
             Text(number)

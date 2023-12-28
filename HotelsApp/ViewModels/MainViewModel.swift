@@ -17,7 +17,7 @@ final class MainViewModel: ObservableObject {
     var hotelCancellables = Set<AnyCancellable>()
     
     func downloadHotelInfo() {
-        guard let url = URL(string: "https://run.mocky.io/v3/d144777c-a67f-4e35-867a-cacc3b827473") else { return }
+        guard let url = URL(string: TextConstants.hotelInfoURL) else { return }
         
         loader.downloadWithCombine(url: url)
             .receive(on: DispatchQueue.main)
@@ -35,7 +35,7 @@ final class MainViewModel: ObservableObject {
     var roomCancellables = Set<AnyCancellable>()
     
     func downloadRoomsInfo() {
-        guard let url = URL(string: "https://run.mocky.io/v3/8b532701-709e-4194-a41c-1a903af00195") else { return }
+        guard let url = URL(string: TextConstants.roomsInfoURL) else { return }
         
         loader.downloadWithCombine(url: url)
             .receive(on: DispatchQueue.main)
@@ -57,7 +57,7 @@ final class MainViewModel: ObservableObject {
     @Published var userEmail: String = ""
     
     func downloadReservationInfo() {
-        guard let url = URL(string: "https://run.mocky.io/v3/63866c74-d593-432c-af8e-f279d1a8d2ff") else { return }
+        guard let url = URL(string: TextConstants.reservationInfoURL) else { return }
         
         loader.downloadWithCombine(url: url)
             .receive(on: DispatchQueue.main)

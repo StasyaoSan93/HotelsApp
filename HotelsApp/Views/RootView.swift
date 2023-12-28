@@ -8,7 +8,7 @@
 import SwiftUI
 
 final class ScreenNavigationClass: ObservableObject {
-    @Published var screen: String = "Hotel"
+    @Published var screen: NavigateScreens = .hotel
 }
 
 struct RootView: View {
@@ -21,16 +21,14 @@ struct RootView: View {
             Color.theme.backgroundAll.ignoresSafeArea()
             
             switch screen.screen {
-            case "Hotel":
+            case .hotel:
                 HotelView()
-            case "Room":
+            case .room:
                 RoomsView()
-            case "Book":
+            case .book:
                 ReservationView()
-            case "Final":
+            case .final:
                 FinalView()
-            default:
-                HotelView()
             }
         })
     }

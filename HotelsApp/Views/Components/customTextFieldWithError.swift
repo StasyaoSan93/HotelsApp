@@ -57,12 +57,12 @@ struct customTextFieldWithError: View {
                             } else if newValue.count == 0 {
                                 viewPhone = hintText
                             } else {
-                                viewPhone = formatForPhone(with: "+* (***) ***-**-**", phone: newValue)
+                                viewPhone = formatForPhone(with: TextConstants.phoneMask, phone: newValue)
                             }
                         }
                         .onAppear {
                             if viewPhone.isEmpty && !fieldText.isEmpty {
-                                viewPhone = formatForPhone(with: "+* (***) ***-**-**", phone: fieldText)
+                                viewPhone = formatForPhone(with: TextConstants.phoneMask, phone: fieldText)
                             }
                         }
                 }

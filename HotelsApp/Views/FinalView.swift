@@ -45,19 +45,19 @@ extension FinalView {
     private var header: some View {
         HStack(content: {
             Button(action: {
-                screen.screen = "Book"
+                screen.screen = .book
             }, label: {
-                Image(systemName: "chevron.left")
+                Image(systemName: TextConstants.chevronLeft)
             })
             
             Spacer()
             
-            Text("Заказ оплачен")
+            Text(TextConstants.payed)
             
             Spacer()
             
             Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
-                Image(systemName: "chevron.left")
+                Image(systemName: TextConstants.chevronLeft)
                     .opacity(0.0)
             })
         })
@@ -73,15 +73,15 @@ extension FinalView {
     
     private var main: some View {
         VStack(spacing: 8, content: {
-            Image("finalImage", bundle: nil)
+            Image(TextConstants.finalImage, bundle: nil)
                 .resizable()
                 .frame(width: 94, height: 94)
             
-            Text("Ваш заказ принят в работу")
+            Text(TextConstants.finalTextOne)
                 .font(.system(size: 22))
                 .foregroundStyle(Color.theme.blackText)
             
-            Text("Подтверждение заказа №\(Int.random(in: 0...1000000)) может занять некоторое время (от 1 часа до суток). Как только мы получим ответ от туроператора, вам на почту придет уведомление.")
+            Text(TextConstants.finalTextTwo)
                 .multilineTextAlignment(.center)
                 .font(.system(size: 16))
                 .foregroundStyle(Color.theme.grayText)
@@ -91,9 +91,9 @@ extension FinalView {
     private var bottomButton: some View {
         VStack(content: {
             Button(action: {
-                screen.screen = "Hotel"
+                screen.screen = .hotel
             }, label: {
-                Text("Супер!")
+                Text(TextConstants.great)
             })
             .withCustomButtonStyle()
         })

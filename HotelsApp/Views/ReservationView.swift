@@ -59,19 +59,19 @@ extension ReservationView {
     private var header: some View {
         HStack(content: {
             Button(action: {
-                screen.screen = "Room"
+                screen.screen = .room
             }, label: {
-                Image(systemName: "chevron.left")
+                Image(systemName: TextConstants.chevronLeft)
             })
             
             Spacer()
             
-            Text("Бронирование")
+            Text(TextConstants.book)
             
             Spacer()
             
             Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
-                Image(systemName: "chevron.left")
+                Image(systemName: TextConstants.chevronLeft)
                     .opacity(0.0)
             })
         })
@@ -113,19 +113,19 @@ extension ReservationView {
     
     private var aboutCard: some View {
         VStack(spacing: 8, content: {
-            customTextField(leftText: "Вылет из", rightText: main.reservation.departure, rightTrailing: false, rightBlueColor: false)
+            customTextField(leftText: TextConstants.departure, rightText: main.reservation.departure, rightTrailing: false, rightBlueColor: false)
             
-            customTextField(leftText: "Срана, город", rightText: main.reservation.arrivalCountry, rightTrailing: false, rightBlueColor: false)
+            customTextField(leftText: TextConstants.country, rightText: main.reservation.arrivalCountry, rightTrailing: false, rightBlueColor: false)
             
-            customTextField(leftText: "Даты", rightText: "\(main.reservation.tourDateStart) - \(main.reservation.tourDateStop)", rightTrailing: false, rightBlueColor: false)
+            customTextField(leftText: TextConstants.dates, rightText: "\(main.reservation.tourDateStart) - \(main.reservation.tourDateStop)", rightTrailing: false, rightBlueColor: false)
             
-            customTextField(leftText: "Кол-во ночей", rightText: "\(main.reservation.numberOfNights)", rightTrailing: false, rightBlueColor: false)
+            customTextField(leftText: TextConstants.numberOfNights, rightText: "\(main.reservation.numberOfNights)", rightTrailing: false, rightBlueColor: false)
             
-            customTextField(leftText: "Отель", rightText: main.reservation.hotelName, rightTrailing: false, rightBlueColor: false)
+            customTextField(leftText: TextConstants.hotel, rightText: main.reservation.hotelName, rightTrailing: false, rightBlueColor: false)
             
-            customTextField(leftText: "Номер", rightText: main.reservation.room, rightTrailing: false, rightBlueColor: false)
+            customTextField(leftText: TextConstants.room, rightText: main.reservation.room, rightTrailing: false, rightBlueColor: false)
             
-            customTextField(leftText: "Питание", rightText: main.reservation.nutrition, rightTrailing: false, rightBlueColor: false)
+            customTextField(leftText: TextConstants.nutrition, rightText: main.reservation.nutrition, rightTrailing: false, rightBlueColor: false)
         })
         .padding(.vertical, 20)
         .background {
@@ -137,18 +137,18 @@ extension ReservationView {
     private var personalInformationCard: some View {
         VStack(content: {
             HStack(content: {
-                Text("Информация о покупателе")
+                Text(TextConstants.aboutBuyer)
                     .font(.system(size: 22))
                     .foregroundStyle(Color.theme.blackText)
                 
                 Spacer()
             })
             
-            customTextFieldWithError(hintText: "Номер телефона", backColor: main.checkFieldStatus, fieldText: $main.phoneNumber, fieldType: .phone)
+            customTextFieldWithError(hintText: TextConstants.phoneNumber, backColor: main.checkFieldStatus, fieldText: $main.phoneNumber, fieldType: .phone)
             
-            customTextFieldWithError(hintText: "Почта", backColor: main.checkFieldStatus, fieldText: $main.userEmail, fieldType: .email)
+            customTextFieldWithError(hintText: TextConstants.email, backColor: main.checkFieldStatus, fieldText: $main.userEmail, fieldType: .email)
             
-            Text("Эти данные никому не передаются. После оплаты мы вышли чек на указанный вами номер и почту")
+            Text(TextConstants.bookText)
                 .font(.system(size: 14))
                 .foregroundStyle(Color.theme.grayText)
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -170,7 +170,7 @@ extension ReservationView {
     
     private var addTouristCard: some View {
         HStack(content: {
-            Text("Добавить туриста")
+            Text(TextConstants.addTourist)
                 .font(.system(size: 22))
                 .foregroundStyle(Color.theme.blackText)
             
@@ -200,13 +200,13 @@ extension ReservationView {
     
     private var priceCard: some View {
         VStack(spacing: 8, content: {
-            customTextField(leftText: "Тур", rightText: "\(main.reservation.tourPrice) ₽", rightTrailing: true, rightBlueColor: false)
+            customTextField(leftText: TextConstants.tour, rightText: TextConstants.forPriceField(price: main.reservation.tourPrice), rightTrailing: true, rightBlueColor: false)
             
-            customTextField(leftText: "Топливный сбор", rightText: "\(main.reservation.fuelCharge) ₽", rightTrailing: true, rightBlueColor: false)
+            customTextField(leftText: TextConstants.fuelCharge, rightText: TextConstants.forPriceField(price: main.reservation.fuelCharge), rightTrailing: true, rightBlueColor: false)
             
-            customTextField(leftText: "Сервисный сбор", rightText: "\(main.reservation.serviceCharge) ₽", rightTrailing: true, rightBlueColor: false)
-            
-            customTextField(leftText: "К оплате", rightText: "\(main.reservation.tourPrice + main.reservation.fuelCharge + main.reservation.serviceCharge) ₽", rightTrailing: true, rightBlueColor: true)
+            customTextField(leftText: TextConstants.serviceCharge, rightText: TextConstants.forPriceField(price: main.reservation.serviceCharge), rightTrailing: true, rightBlueColor: false)
+
+            customTextField(leftText: TextConstants.toPay, rightText: TextConstants.forPriceField(price: main.reservation.tourPrice + main.reservation.fuelCharge + main.reservation.serviceCharge), rightTrailing: true, rightBlueColor: true)
         })
         .padding(.vertical, 20)
         .background {
@@ -220,10 +220,10 @@ extension ReservationView {
             Button(action: {
                 main.checkFieldStatus = main.checkTourist()
                 if main.checkFieldStatus {
-                    screen.screen = "Final"
+                    screen.screen = .final
                 }
             }, label: {
-                Text("Оплатить \(main.reservation.tourPrice + main.reservation.fuelCharge + main.reservation.serviceCharge) ₽")
+                Text(TextConstants.payPrice(price: main.reservation.tourPrice + main.reservation.fuelCharge + main.reservation.serviceCharge))
             })
             .withCustomButtonStyle()
         })
@@ -274,7 +274,7 @@ struct touristCard: View {
                         minimizeView.toggle()
                     }
                 }, label: {
-                    Image(systemName: "chevron.up")
+                    Image(systemName: TextConstants.chevronUp)
                         .font(.system(size: 22))
                         .foregroundStyle(Color.theme.blueText)
                         .rotationEffect(.degrees(minimizeView ? 180 : 0))
@@ -287,12 +287,12 @@ struct touristCard: View {
             })
             
             if !minimizeView {
-                customTextFieldWithError(hintText: "Имя", backColor: fieldColor, fieldText: $tourist.firstName, fieldType: .info)
-                customTextFieldWithError(hintText: "Фамилия", backColor: fieldColor, fieldText: $tourist.secondName, fieldType: .info)
-                customTextFieldWithError(hintText: "Дата рождения", backColor: fieldColor, fieldText: $tourist.birthDate, fieldType: .info)
-                customTextFieldWithError(hintText: "Гражданство", backColor: fieldColor, fieldText: $tourist.nationality, fieldType: .info)
-                customTextFieldWithError(hintText: "Номер загранпаспорта", backColor: fieldColor, fieldText: $tourist.passportNumber, fieldType: .info)
-                customTextFieldWithError(hintText: "Срок действия загранпаспорта", backColor: fieldColor, fieldText: $tourist.passportEndDate, fieldType: .info)
+                customTextFieldWithError(hintText: TextConstants.firstName, backColor: fieldColor, fieldText: $tourist.firstName, fieldType: .info)
+                customTextFieldWithError(hintText: TextConstants.lastName, backColor: fieldColor, fieldText: $tourist.secondName, fieldType: .info)
+                customTextFieldWithError(hintText: TextConstants.birthDate, backColor: fieldColor, fieldText: $tourist.birthDate, fieldType: .info)
+                customTextFieldWithError(hintText: TextConstants.nationality, backColor: fieldColor, fieldText: $tourist.nationality, fieldType: .info)
+                customTextFieldWithError(hintText: TextConstants.passportNumber, backColor: fieldColor, fieldText: $tourist.passportNumber, fieldType: .info)
+                customTextFieldWithError(hintText: TextConstants.passportEndDate, backColor: fieldColor, fieldText: $tourist.passportEndDate, fieldType: .info)
             }
         })
         .padding(20)
@@ -310,25 +310,25 @@ struct touristCard: View {
     func cardTitle(id: Int) -> some View {
         switch id {
         case 1:
-            Text("Первый турист")
+            Text(TextConstants.firstTourist)
         case 2:
-            Text("Второй турист")
+            Text(TextConstants.secondTourist)
         case 3:
-            Text("Третий турист")
+            Text(TextConstants.thirdTourist)
         case 4:
-            Text("Четвертый турист")
+            Text(TextConstants.fourthTourist)
         case 5:
-            Text("Пятый турист")
+            Text(TextConstants.fifthTourist)
         case 6:
-            Text("Шестой турист")
+            Text(TextConstants.sixthTourist)
         case 7:
-            Text("Седьмой турист")
+            Text(TextConstants.seventhTourist)
         case 8:
-            Text("Восьмой турист")
+            Text(TextConstants.eighthTourist)
         case 9:
-            Text("Девятый турист")
+            Text(TextConstants.ninethTourist)
         case 10:
-            Text("Десятый турист")
+            Text(TextConstants.tenthTourist)
         default:
             Text("")
         }
