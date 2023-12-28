@@ -21,7 +21,7 @@ final class MainViewModel: ObservableObject {
         
         loader.downloadWithCombine(url: url)
             .receive(on: DispatchQueue.main)
-            .decode(type: HotelModel.self, decoder: JSONDecoder())
+            .decode(type: HotelModel.self, decoder: JSONDecoder.snakeCaseConverting)
             .sink { _ in
                  
             } receiveValue: { [weak self] hotel in
@@ -39,7 +39,7 @@ final class MainViewModel: ObservableObject {
         
         loader.downloadWithCombine(url: url)
             .receive(on: DispatchQueue.main)
-            .decode(type: RoomsModel.self, decoder: JSONDecoder())
+            .decode(type: RoomsModel.self, decoder: JSONDecoder.snakeCaseConverting)
             .sink { _ in
                  
             } receiveValue: { [weak self] rooms in
@@ -61,7 +61,7 @@ final class MainViewModel: ObservableObject {
         
         loader.downloadWithCombine(url: url)
             .receive(on: DispatchQueue.main)
-            .decode(type: ReservationModel.self, decoder: JSONDecoder())
+            .decode(type: ReservationModel.self, decoder: JSONDecoder.snakeCaseConverting)
             .sink { _ in
                  
             } receiveValue: { [weak self] reservation in

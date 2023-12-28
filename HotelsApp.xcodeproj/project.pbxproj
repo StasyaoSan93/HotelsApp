@@ -24,6 +24,7 @@
 		7D1157CE2B301AE400D8F43C /* RoomsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D1157CD2B301AE400D8F43C /* RoomsView.swift */; };
 		7D3C35752B31731A007AE18D /* customTextFieldWithError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D3C35742B31731A007AE18D /* customTextFieldWithError.swift */; };
 		7D5BCD202B30377A00A6D63A /* RoomModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5BCD1F2B30377A00A6D63A /* RoomModel.swift */; };
+		7D8DB1F42B3D462000E9614F /* JSONDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D8DB1F32B3D462000E9614F /* JSONDecoder.swift */; };
 		7D9996512B32C7C200785F26 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D9996502B32C7C200785F26 /* RootView.swift */; };
 		7DCA08C02B3D2794008851A0 /* TextConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DCA08BF2B3D2794008851A0 /* TextConstant.swift */; };
 		7DCA08C22B3D27C7008851A0 /* NavigateScreens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DCA08C12B3D27C7008851A0 /* NavigateScreens.swift */; };
@@ -54,6 +55,7 @@
 		7D1157CD2B301AE400D8F43C /* RoomsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomsView.swift; sourceTree = "<group>"; };
 		7D3C35742B31731A007AE18D /* customTextFieldWithError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = customTextFieldWithError.swift; sourceTree = "<group>"; };
 		7D5BCD1F2B30377A00A6D63A /* RoomModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomModel.swift; sourceTree = "<group>"; };
+		7D8DB1F32B3D462000E9614F /* JSONDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONDecoder.swift; sourceTree = "<group>"; };
 		7D9996502B32C7C200785F26 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		7DCA08BF2B3D2794008851A0 /* TextConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextConstant.swift; sourceTree = "<group>"; };
 		7DCA08C12B3D27C7008851A0 /* NavigateScreens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigateScreens.swift; sourceTree = "<group>"; };
@@ -185,6 +187,7 @@
 				7D1157C62B2FFBD900D8F43C /* Color.swift */,
 				7D1157C82B300FE800D8F43C /* View.swift */,
 				7DFD89DD2B331EB80064F5DA /* String.swift */,
+				7D8DB1F32B3D462000E9614F /* JSONDecoder.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -274,6 +277,7 @@
 				7D1157C92B300FE800D8F43C /* View.swift in Sources */,
 				7D0E169F2B31B09500BADD5D /* FieldType.swift in Sources */,
 				7D1157C72B2FFBD900D8F43C /* Color.swift in Sources */,
+				7D8DB1F42B3D462000E9614F /* JSONDecoder.swift in Sources */,
 				7D1157B62B2FF9D100D8F43C /* HotelView.swift in Sources */,
 				7DCE0AA02B305614001DEFCB /* RatingField.swift in Sources */,
 				7DCE0A9C2B304A63001DEFCB /* ReservationView.swift in Sources */,
