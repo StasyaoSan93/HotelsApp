@@ -8,7 +8,7 @@ The application was offered as a test task.
 
 Technology stack:
 - Swift
-﻿﻿- MVVM + Coordinator
+﻿﻿- MVVM
 ﻿﻿- SwiftUI
 ﻿﻿- Combine
 
