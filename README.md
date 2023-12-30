@@ -14,8 +14,6 @@ Technology stack:
 
 ## Screenshots
 
-###Hotel page
+### Hotel page
 
-![Alt text](<Simulator Screenshot - iPhone 15 Pro - 2023-12-30 at 09.42.10.png>) ![Alt text](<Simulator Screenshot - iPhone 15 Pro - 2023-12-30 at 09.43.28.png>)
-
-<img src="Simulator Screenshot - iPhone 15 Pro - 2023-12-30 at 09.42.10.png" alt="drawing" width="200"/>
+<img src="Simulator Screenshot - iPhone 15 Pro - 2023-12-30 at 09.42.10.png" alt="drawing" width="250"/> <img src="Simulator Screenshot - iPhone 15 Pro - 2023-12-30 at 09.43.28.png" alt="drawing" width="250"/> 
