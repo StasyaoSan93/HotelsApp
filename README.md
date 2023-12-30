@@ -16,4 +16,12 @@ Technology stack:
 
 ### Hotel page
 
-<img src="Simulator Screenshot - iPhone 15 Pro - 2023-12-30 at 09.42.10.png" alt="drawing" width="250"/> <img src="Simulator Screenshot - iPhone 15 Pro - 2023-12-30 at 09.43.28.png" alt="drawing" width="250"/> 
+<img src="Screenshots/HotelScreen1.png" alt="drawing" width="250"/>   <img src="Screenshots/HotelScreen2.png" alt="drawing" width="250"/> 
+
+### Room page
+
+<img src="Screenshots/RoomScreen1.png" alt="drawing" width="250"/>
+
+### Book page
+
+<img src="Screenshots/BookScreen1.png" alt="drawing" width="250"/>   <img src="Screenshots/BookScreen2.png" alt="drawing" width="250"/> 
