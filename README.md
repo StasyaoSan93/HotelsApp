@@ -12,3 +12,8 @@ Technology stack:
 ﻿﻿- SwiftUI
 ﻿﻿- Combine
 
+## Screenshots
+
+###Hotel page
+
+![Alt text](<Simulator Screenshot - iPhone 15 Pro - 2023-12-30 at 09.42.10.png>) ![Alt text](<Simulator Screenshot - iPhone 15 Pro - 2023-12-30 at 09.43.28.png>)
